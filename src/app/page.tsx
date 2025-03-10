@@ -7,6 +7,7 @@ import {
   InputBox,
   MorseContainer,
 } from "./styles/styles";
+import { formatLetter } from "./helpers/formatLetter";
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
@@ -30,17 +31,17 @@ export default function Home() {
       </FormContainer>
       <MorseContainer>
         {submittedValueDestruct.map((letter) => {
-          const formattedLetter: string = letter.toLowerCase();
+          const formattedLetter: string = formatLetter(letter);
           const morseTranslation: string[] =
             conversionTable[formattedLetter as keyof typeof conversionTable] ||
             [];
 
           console.log("morseTranslate", morseTranslation);
 
-          return morseTranslation.map((morse) => {
+          return `${formattedLetter}=${morseTranslation.map((morse) => {
             console.log("morse", morse);
-            return `${morse} `;
-          });
+            return `${morse as string}`;
+          })} :: `;
         })}
       </MorseContainer>
     </Container>
