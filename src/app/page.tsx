@@ -1,38 +1,67 @@
 "use client";
 import { useState } from "react";
 import styled from "styled-components";
+import { conversionTable } from "./conversion";
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
-  const [submittedValue, setSubmittedValue] = useState("");
 
   // Handle the input change
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(e.target.value);
   };
 
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmittedValue(inputValue);
-    setInputValue("");
-    console.log("Submitted value:", submittedValue);
-  };
+  const submittedValueDestruct: string[] = inputValue.split("") ?? [];
 
   return (
     <Container>
-      <h1>Morse Code App</h1>
-      <FormContainer onSubmit={handleSubmit}>
+      <h1 style={{ margin: "10px" }}>Morse Code App</h1>
+      <FormContainer>
         <InputBox
           value={inputValue}
           onChange={handleInputChange}
           placeholder="Enter text here..."
         />
-        <SubmitBtn type="submit">Submit</SubmitBtn>
       </FormContainer>
+      <MorseContainer>
+        {submittedValueDestruct.map((letter) => {
+          const formattedLetter: string = letter.toLowerCase();
+          const morseTranslation: string[] =
+            conversionTable[formattedLetter as keyof typeof conversionTable] ||
+            [];
+
+          console.log("morseTranslate", morseTranslation);
+
+          return morseTranslation.map((morse) => {
+            console.log("morse", morse);
+            return `${morse} `;
+          });
+        })}
+      </MorseContainer>
     </Container>
   );
 }
+
+const MorseContainer = styled.div`
+  width: 50%;
+  height: auto;
+  min-height: 200px;
+  max-height: 50%;
+
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+
+  margin: 10px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: auto;
+`;
 
 const FormContainer = styled.form`
   width: 50%;
@@ -43,27 +72,8 @@ const FormContainer = styled.form`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-`;
 
-const SubmitBtn = styled.button`
-  width: auto;
-  height: 10%;
-  padding: 10px;
-  border: 1px solid green;
-  background-color: green;
-  border-radius: 10px;
-  font-weight: bold;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-
-  &:hover {
-    background-color: darkgreen;
-  }
+  margin: 10px;
 `;
 
 const InputBox = styled.textarea`
@@ -95,7 +105,7 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  background-color: grey;
+  background-color: black;
 
   box-sizing: border-box;
 `;
