@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MorseContainer = styled.div`
-  width: 50%;
+  width: 60%;
   height: auto;
   min-height: 200px;
   max-height: 50%;
@@ -22,7 +22,7 @@ export const MorseContainer = styled.div`
 `;
 
 export const FormContainer = styled.form`
-  width: 50%;
+  width: 80%;
   height: 20%;
   min-height: 300px;
 
@@ -32,6 +32,13 @@ export const FormContainer = styled.form`
   align-items: center;
 
   margin: 10px;
+`;
+
+export const TranslationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 export const InputBox = styled.textarea`
@@ -49,8 +56,8 @@ export const InputBox = styled.textarea`
   align-items: flex-start;
 
   &:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #ff6a00;
+    box-shadow: 0 0 5px rgba(255, 51, 0, 0.5);
   }
 `;
 

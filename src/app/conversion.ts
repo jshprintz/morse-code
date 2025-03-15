@@ -35,7 +35,6 @@ export const conversionTable = {
   7: ["dash", "dash", "dot", "dot", "dot"],
   8: ["dash", "dash", "dash", "dot", "dot"],
   9: ["dash", "dash", "dash", "dash", "dot"],
-  space: ["_"],
   // Punctuation marks
   ".": ["dot", "dash", "dot", "dash", "dot"],
   ",": ["dash", "dash", "dot", "dot", "dash", "dash"],
